@@ -35,7 +35,7 @@ const Dashboard = () => {
                     </a>
                     <a
                         className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
-                        href="#"
+                        href="/cursos"
                     >
                         <span className="material-symbols-outlined" data-icon="school">
                             school
@@ -485,7 +485,7 @@ const Dashboard = () => {
                     </span>
                     <span className="text-[10px]">Dashboard</span>
                 </a>
-                <a className="flex flex-col items-center text-slate-600" href="#">
+                <a className="flex flex-col items-center text-slate-600" href="/cursos">
                     <span className="material-symbols-outlined" data-icon="school">
                         school
                     </span>
