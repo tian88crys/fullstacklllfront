@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
     return (
@@ -22,9 +23,9 @@ const Dashboard = () => {
                 </div>
                 {/* Main Navigation */}
                 <nav className="flex-1 space-y-1">
-                    <a
+                    <Link
                         className="flex items-center gap-3 text-white border-l-4 border-[#745b00] bg-white/10 px-6 py-4 transition-all translate-x-1"
-                        href="#"
+                        to="/dashboard"
                     >
                         <span className="material-symbols-outlined" data-icon="dashboard">
                             dashboard
@@ -32,10 +33,10 @@ const Dashboard = () => {
                         <span className="font-inter font-medium text-sm tracking-wide">
                             Dashboard
                         </span>
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                         className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
-                        href="/cursos"
+                        to="/cursos"
                     >
                         <span className="material-symbols-outlined" data-icon="school">
                             school
@@ -43,7 +44,7 @@ const Dashboard = () => {
                         <span className="font-inter font-medium text-sm tracking-wide">
                             My Courses
                         </span>
-                    </a>
+                    </Link>
                     <a
                         className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
                         href="/asistencia.html"
@@ -479,18 +480,18 @@ const Dashboard = () => {
 
             {/* Mobile Navigation (BottomNavBar Fallback) */}
             <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-outline-variant/10 h-16 flex items-center justify-around px-4 z-50">
-                <a className="flex flex-col items-center text-[#745b00] font-bold" href="#">
+                <Link className="flex flex-col items-center text-[#745b00] font-bold" to="/dashboard">
                     <span className="material-symbols-outlined" data-icon="dashboard">
                         dashboard
                     </span>
                     <span className="text-[10px]">Dashboard</span>
-                </a>
-                <a className="flex flex-col items-center text-slate-600" href="/cursos">
+                </Link>
+                <Link className="flex flex-col items-center text-slate-600" to="/cursos">
                     <span className="material-symbols-outlined" data-icon="school">
                         school
                     </span>
                     <span className="text-[10px]">Cursos</span>
-                </a>
+                </Link>
                 <a className="flex flex-col items-center text-slate-600" href="/asistencia.html">
                     <span className="material-symbols-outlined" data-icon="fact_check">
                         fact_check
