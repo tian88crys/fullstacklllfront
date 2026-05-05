@@ -42,7 +42,7 @@ const Dashboard = () => {
                             school
                         </span>
                         <span className="font-inter font-medium text-sm tracking-wide">
-                            My Courses
+                            Mis Cursos
                         </span>
                     </Link>
                     <a
@@ -53,7 +53,7 @@ const Dashboard = () => {
                             fact_check
                         </span>
                         <span className="font-inter font-medium text-sm tracking-wide">
-                            Attendance
+                            Asistencia
                         </span>
                     </a>
                     <a
@@ -64,7 +64,7 @@ const Dashboard = () => {
                             grade
                         </span>
                         <span className="font-inter font-medium text-sm tracking-wide">
-                            Grades
+                            Notas
                         </span>
                     </a>
                     <a
@@ -75,7 +75,7 @@ const Dashboard = () => {
                             mail
                         </span>
                         <span className="font-inter font-medium text-sm tracking-wide">
-                            Communications
+                            Mensajes
                         </span>
                     </a>
                 </nav>
@@ -85,7 +85,7 @@ const Dashboard = () => {
                         <span className="material-symbols-outlined" data-icon="add">
                             add
                         </span>
-                        <span>New Entry</span>
+                        <span>Nuevo Registro</span>
                     </button>
                 </div>
                 {/* Footer Navigation */}
@@ -98,7 +98,7 @@ const Dashboard = () => {
                             help
                         </span>
                         <span className="font-inter font-medium text-sm tracking-wide">
-                            Help Center
+                            Centro de Ayuda
                         </span>
                     </a>
                     <a
@@ -109,7 +109,7 @@ const Dashboard = () => {
                             settings
                         </span>
                         <span className="font-inter font-medium text-sm tracking-wide">
-                            Settings
+                            Configuración
                         </span>
                     </a>
                 </div>
@@ -399,7 +399,7 @@ const Dashboard = () => {
                                     Accesos Rápidos
                                 </h3>
                                 <div className="space-y-3">
-                                    <button className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
+                                    <a href="/asistencia.html" className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
                                         <span
                                             className="material-symbols-outlined text-secondary group-hover:text-white"
                                             data-icon="how_to_reg"
@@ -407,8 +407,8 @@ const Dashboard = () => {
                                             how_to_reg
                                         </span>
                                         <span className="font-medium text-sm">Pasar Asistencia</span>
-                                    </button>
-                                    <button className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
+                                    </a>
+                                    <a href="/notas.html" className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
                                         <span
                                             className="material-symbols-outlined text-secondary group-hover:text-white"
                                             data-icon="upload_file"
@@ -416,8 +416,8 @@ const Dashboard = () => {
                                             upload_file
                                         </span>
                                         <span className="font-medium text-sm">Subir Nota</span>
-                                    </button>
-                                    <button className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
+                                    </a>
+                                    <a href="#" className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
                                         <span
                                             className="material-symbols-outlined text-secondary group-hover:text-white"
                                             data-icon="campaign"
@@ -425,7 +425,7 @@ const Dashboard = () => {
                                             campaign
                                         </span>
                                         <span className="font-medium text-sm">Enviar Anuncio</span>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
 

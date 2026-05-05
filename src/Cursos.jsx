@@ -28,22 +28,22 @@ const Cursos = () => {
             <Link className="flex items-center gap-3 text-white border-l-4 border-[#745b00] bg-white/10 px-6 py-4 transition-all translate-x-1"
                 to="/cursos">
                 <span className="material-symbols-outlined" data-icon="school">school</span>
-                <span className="font-inter font-medium text-sm tracking-wide">My Courses</span>
+                <span className="font-inter font-medium text-sm tracking-wide">Mis Cursos</span>
             </Link>
             <a className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
                 href="/asistencia.html">
                 <span className="material-symbols-outlined" data-icon="fact_check">fact_check</span>
-                <span className="font-inter font-medium text-sm tracking-wide">Attendance</span>
+                <span className="font-inter font-medium text-sm tracking-wide">Asistencia</span>
             </a>
             <a className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
                 href="/notas.html">
                 <span className="material-symbols-outlined" data-icon="grade">grade</span>
-                <span className="font-inter font-medium text-sm tracking-wide">Grades</span>
+                <span className="font-inter font-medium text-sm tracking-wide">Notas</span>
             </a>
             <a className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
                 href="#">
                 <span className="material-symbols-outlined" data-icon="mail">mail</span>
-                <span className="font-inter font-medium text-sm tracking-wide">Communications</span>
+                <span className="font-inter font-medium text-sm tracking-wide">Mensajes</span>
             </a>
         </nav>
         {/*  CTA  */}
@@ -51,7 +51,7 @@ const Cursos = () => {
             <button
                 className="w-full bg-secondary-container text-on-secondary-container font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:brightness-95 transition-all active:scale-95">
                 <span className="material-symbols-outlined" data-icon="add">add</span>
-                <span>New Entry</span>
+                <span>Nuevo Registro</span>
             </button>
         </div>
         {/*  Footer Navigation  */}
@@ -59,12 +59,12 @@ const Cursos = () => {
             <a className="flex items-center gap-3 text-slate-300 px-6 py-3 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
                 href="#">
                 <span className="material-symbols-outlined" data-icon="help">help</span>
-                <span className="font-inter font-medium text-sm tracking-wide">Help Center</span>
+                <span className="font-inter font-medium text-sm tracking-wide">Centro de Ayuda</span>
             </a>
             <a className="flex items-center gap-3 text-slate-300 px-6 py-3 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
                 href="#">
                 <span className="material-symbols-outlined" data-icon="settings">settings</span>
-                <span className="font-inter font-medium text-sm tracking-wide">Settings</span>
+                <span className="font-inter font-medium text-sm tracking-wide">Configuración</span>
             </a>
         </div>
     </aside>
