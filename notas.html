@@ -558,9 +558,45 @@
                     });
                 }
 
-                // Add event listeners so averages update when user types
+                // Add event listeners so averages update when user types and input is validated
                 inputs.forEach(input => {
-                    input.addEventListener('input', () => updateAverages(row, inputs, avgParcialCell, avgFinalSpan));
+                    input.addEventListener('input', (e) => {
+                        let val = input.value.replace(',', '.');
+                        val = val.replace(/[^0-9.]/g, '');
+                        
+                        const parts = val.split('.');
+                        if (parts.length > 2) {
+                            val = parts[0] + '.' + parts.slice(1).join('').replace(/\./g, '');
+                        }
+                        
+                        if (parts.length === 2 && parts[1].length > 1) {
+                            val = parts[0] + '.' + parts[1].substring(0, 1);
+                        }
+
+                        if (val !== '') {
+                            const num = parseFloat(val);
+                            if (num > 7.0) {
+                                val = "7.0";
+                            }
+                        }
+                        
+                        input.value = val;
+                        updateAverages(row, inputs, avgParcialCell, avgFinalSpan);
+                    });
+
+                    input.addEventListener('blur', () => {
+                        if (input.value !== '') {
+                            let num = parseFloat(input.value);
+                            if (isNaN(num)) {
+                                input.value = '';
+                            } else {
+                                if (num < 1.0) num = 1.0;
+                                if (num > 7.0) num = 7.0;
+                                input.value = num.toFixed(1);
+                            }
+                        }
+                        updateAverages(row, inputs, avgParcialCell, avgFinalSpan);
+                    });
                 });
 
                 // Initial calculation
