@@ -1,50 +1,58 @@
 # Portal Educativo - Colegio Bernardo O'Higgins 🏫
 
-Este repositorio contiene la fase inicial del frontend para el Portal Educativo del Colegio Bernardo O'Higgins. El objetivo del proyecto es construir una plataforma web moderna, rápida y escalable para la gestión docente.
+Este repositorio contiene el código frontend (y un clon del backend) para el Portal Educativo del Colegio Bernardo O'Higgins. El objetivo del proyecto es construir una plataforma web moderna, interactiva y escalable para la gestión docente.
 
-## Estado del Proyecto: `Fase Inicial` 🚀
+## Estado del Proyecto: `Fase 2 (Integración Total y SPA)` 🚀
 
-Actualmente el proyecto se encuentra en la etapa de maquetación y diseño de la interfaz de usuario. No hay conexión activa a un servidor ni base de datos todavía. 
+El proyecto ha superado la etapa de maquetación estática y se ha convertido en una **Single Page Application (SPA)** completamente funcional. Ahora incluye conexión real a microservicios backend, patrones arquitectónicos avanzados y gestión de estado en tiempo real.
 
-### Vistas Implementadas
-1. **Página de Login (`/`)**: Interfaz de autenticación principal y maquetación de formulario.
-2. **Dashboard Docente (`/dashboard`)**: Interfaz principal (Panel de Control) con widgets de agenda diarios, notificaciones, próximos eventos y menús de acceso.
+### Vistas y Funcionalidades Implementadas
+1. **Página de Login (`/`)**: Integrada con el backend a través de la API (`/usuarios/login`) para validar credenciales reales enviando peticiones POST mediante **Axios**.
+2. **Dashboard Docente (`/dashboard`)**: Panel de Control con navegación interna unificada, logrando transiciones sin recargas de página.
+3. **Módulo de Calificaciones (`/notas`)**: Interfaz para el ingreso dinámico de calificaciones, cálculos en tiempo real y conectividad con la campana de notificaciones.
+4. **Módulo de Asistencia (`/asistencia`)**: Componente reactivo con cálculo estadístico en vivo (Presentes, Ausentes, Atrasos) y guardado en estado local.
+5. **Autenticación (Logout)**: Botón interactivo global que desvincula la sesión y redirige al inicio de sesión.
 
-> *Nota: Se puede navegar fluidamente entre ambas vistas ya que se encuentran conectadas e integradas al router local.*
+### 🔔 Patrón Observador (Observer Pattern)
+Este proyecto hace un uso destacado del **Patrón Observer** para implementar notificaciones reactivas a través de toda la aplicación:
+- **Backend (Publisher)**: El servidor implementa *Server-Sent Events (SSE)* (`SseEmitter`). El servicio despacha eventos (ej. guardar una nota) y avisa automáticamente a los clientes suscritos sin que pidan la actualización.
+- **Frontend (Subscriber)**: La aplicación de React usa la API nativa `EventSource` integrada en un Hook (`useNotificationObserver`) para suscribirse. Al recibir señales, un Contexto Global (`NotificationContext`) despacha el evento, provocando que la interfaz (ej. campana de notificaciones) despliegue de inmediato la nueva alerta.
 
 ## 🛠 Tecnologías Utilizadas
 
-- **[React](https://react.dev/) / JSX**: Biblioteca esencial para construir los Layouts modulares.
-- **[Vite](https://vitejs.dev/)**: Motor de compilación ultrarrápido y servidor de desarrollo ágil.
-- **[Tailwind CSS v4](https://tailwindcss.com/)**: Para estilizado atómico y personalización del sistema de colores (utilizando el nuevo formato `@theme`).
-- **[React Router DOM](https://reactrouter.com/)**: Manejo del enrutamiento de páginas del lado del cliente.
-- **Material Symbols Outline**: Set de recursos visuales e iconos dinámicos de Google.
+- **[React](https://react.dev/) / JSX**: Biblioteca base del ecosistema. Todo el proyecto fue refactorizado y purgado de HTMLs estáticos para funcionar con componentes puros de React.
+- **[React Router DOM](https://reactrouter.com/)**: Motor que habilita la navegación SPA (Componentes `<Link>` y `useNavigate`).
+- **[Axios](https://axios-http.com/)**: Cliente HTTP para consultas directas y organizadas hacia el backend de Spring Boot.
+- **[Vite](https://vitejs.dev/)**: Servidor de desarrollo ágil y motor de compilación.
+- **[Tailwind CSS v4](https://tailwindcss.com/)**: Estilizado atómico moderno.
 
 ## ⚙️ Instalación y Entorno Local
 
-Es necesario contar con [Node.js](https://nodejs.org/es/) instalado para iniciar el software.
+Para levantar el entorno completo:
 
 1. **Clonar este repositorio**:
    ```bash
    git clone https://github.com/tian88crys/fullstacklllfront.git
-   ```
-2. **Navegar a la carpeta del proyecto**:
-   ```bash
    cd fullstacklllfront
    ```
-3. **Instalar el registro de dependencias**:
+2. **Levantar el Frontend**:
    ```bash
    npm install
-   ```
-4. **Ejecutar en modo desarrollador**:
-   ```bash
    npm run dev
    ```
-   *Hecho esto, abre tu navegador en la URL `http://localhost:5173/` para visualizar la app y aplicar cambios en tiempo real.*
+   *Se abrirá en `http://localhost:5173/`*
 
-## 🔜 Próximos Eventos y Mejoras (Roadmap)
-Como el proyecto pasará pronto a siguientes etapas, esto se planifica a futuro:
-- [ ] Diagramación y construcción del API Backend (Node.js/Python).
-- [ ] Conexión a la base de datos empresarial **(Oracle DB)** para inyectar datos reales al Dashboard. 
-- [ ] Seguridad, sesiones locales y autenticación viva (JSON Web Tokens).
-- [ ] Desarrollo de las demas pantallas del navbar (Subir notas, Gestión de Curso).
+3. **Levantar el Backend (Microservicio de Usuarios)**:
+   Abre una segunda terminal, navega hacia el backend clonado y ejecuta:
+   ```bash
+   cd backend-clone/usuarios
+   sh ./mvnw spring-boot:run
+   ```
+   *El servidor Java (Spring Boot) se iniciará en el puerto designado (ej. 8081), habilitando el inicio de sesión.*
+
+## 🔙 Backend Estructurado
+
+Se ha realizado un proceso de limpieza profundo en la carpeta `backend-clone/`.
+- Todos los servicios (Asistencia, Calificaciones, Conducta, Gestion, Usuarios) se encuentran organizados.
+- Los esquemas, scripts y diseños de la Base de Datos Oracle viven ordenadamente en la carpeta `backend-clone/docs/`.
+- Se gestiona como un multi-proyecto mediante el `pom.xml` raíz utilizando **Maven**.
