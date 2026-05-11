@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --primary: #00113a;
+    --primary-container: #002366;
+    --primary-fixed: #dbe1ff;
+    --primary-fixed-dim: #b3c5ff;
+    --on-primary: #ffffff;
+    --on-primary-container: #758dd5;
+    --on-primary-fixed: #00174a;
+    --on-primary-fixed-variant: #2a4386;
+    
+    --secondary: #745b00;
+    --secondary-container: #fcd353;
+    --secondary-fixed: #ffe089;
+    --secondary-fixed-dim: #eac243;
+    --on-secondary: #ffffff;
+    --on-secondary-container: #725a00;
+    --on-secondary-fixed: #241a00;
+    --on-secondary-fixed-variant: #574500;
+
+    --tertiary: #0d141c;
+    --tertiary-container: #222931;
+    --tertiary-fixed: #dce3ee;
+    --tertiary-fixed-dim: #c0c7d2;
+    --on-tertiary: #ffffff;
+    --on-tertiary-container: #89909a;
+    --on-tertiary-fixed: #151c24;
+    --on-tertiary-fixed-variant: #404750;
+
+    --surface: #f8f9fa;
+    --surface-bright: #f8f9fa;
+    --surface-dim: #d9dadb;
+    --surface-variant: #e1e3e4;
+    --surface-tint: #435b9f;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f3f4f5;
+    --surface-container: #edeeef;
+    --surface-container-high: #e7e8e9;
+    --surface-container-highest: #e1e3e4;
+    
+    --on-surface: #191c1d;
+    --on-surface-variant: #444650;
+    --inverse-surface: #2e3132;
+    --inverse-on-surface: #f0f1f2;
+    --inverse-primary: #b3c5ff;
+
+    --outline: #757682;
+    --outline-variant: #c5c6d2;
+
+    --error: #ba1a1a;
+    --error-container: #ffdad6;
+    --on-error: #ffffff;
+    --on-error-container: #93000a;
+    
+    --background: #f8f9fa;
+    --on-background: #191c1d;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--on-surface);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-headline {
+    font-family: 'Manrope', sans-serif;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+}
+
+.shadow-ambient {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.btn-gradient {
+    background: linear-gradient(to bottom right, var(--primary), var(--primary-container));
+    color: var(--on-primary);
+}
+
+.grade-input {
+    transition: all 0.2s ease;
+}
+
+.grade-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+.nota-aprobado {
+    background-color: var(--secondary-container);
+    color: var(--on-secondary-container);
+}
+
+.nota-reprobado {
+    background-color: var(--error-container);
+    color: var(--error);
+}
+
+.pnd-status {
+    background-color: var(--surface-container);
+    color: var(--on-surface-variant);
+}
+
+/* Estados de Asistencia en estilos.css */
+.peer:checked + .state-p {
+    background-color: #16a34a; /* verde-600 */
+    color: white;
+}
+
+.peer:checked + .state-a {
+    background-color: var(--error);
+    color: white;
+}
+
+.peer:checked + .state-at {
+    background-color: #f59e0b; /* amber-500 */
+    color: white;
+}
+
+.peer:checked + .state-j {
+    background-color: #3b82f6; /* blue-500 */
+    color: white;
+}
+
+.state-btn {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    transition: all 0.2s;
+    color: var(--outline);
+    cursor: pointer;
+}
+
+.state-btn:hover {
+    background-color: var(--surface-variant);
+}
