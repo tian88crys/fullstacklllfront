@@ -1,7 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cursos = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        navigate('/');
+    };
+
     return (
         <div className="bg-surface font-body text-on-surface antialiased">
 
@@ -30,16 +36,16 @@ const Cursos = () => {
                 <span className="material-symbols-outlined" data-icon="school">school</span>
                 <span className="font-inter font-medium text-sm tracking-wide">Mis Cursos</span>
             </Link>
-            <a className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
-                href="/asistencia.html">
+            <Link className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
+                to="/asistencia">
                 <span className="material-symbols-outlined" data-icon="fact_check">fact_check</span>
                 <span className="font-inter font-medium text-sm tracking-wide">Asistencia</span>
-            </a>
-            <a className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
-                href="/notas.html">
+            </Link>
+            <Link className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
+                to="/notas">
                 <span className="material-symbols-outlined" data-icon="grade">grade</span>
                 <span className="font-inter font-medium text-sm tracking-wide">Notas</span>
-            </a>
+            </Link>
             <a className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
                 href="#">
                 <span className="material-symbols-outlined" data-icon="mail">mail</span>
@@ -101,7 +107,7 @@ const Cursos = () => {
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMccHPVlSRe8ajkQcm4zoYF8l5fC9YMdk9qVfQQRLsgrb-zmTBSgN5MarkiGD-DkSqSOYNhZbeVhFKa8pYzhvdZxj7ayBgMkHmmwzVA-PVmsM0VNKY7zSW6OHq8SlhQFxz5PFiahIRyeses3ctWEI73SuIKaNu-QzQ8njjtEaYU_OhiDcJ1gzC6RRIkT52tXuZ2dsKNP4RhVOCaEyngVpif6qQkMLUfI9w_gKAHZv-kCmbG6Jot_W8QEBE_RD8t8yypPHattMcajjc" />
                         <span className="text-primary font-bold font-manrope text-sm hidden sm:inline">Prof. Juan
                             Pérez</span>
-                        <span className="material-symbols-outlined text-slate-400" data-icon="logout">logout</span>
+                        <span className="material-symbols-outlined text-slate-400 hover:text-red-500 cursor-pointer transition-colors" data-icon="logout" onClick={handleLogout}>logout</span>
                     </div>
                 </div>
             </div>
@@ -431,10 +437,10 @@ const Cursos = () => {
             <span className="material-symbols-outlined" data-icon="school">school</span>
             <span className="text-[10px]">Cursos</span>
         </Link>
-        <a className="flex flex-col items-center text-slate-600" href="/asistencia.html">
+        <Link className="flex flex-col items-center text-slate-600" to="/asistencia">
             <span className="material-symbols-outlined" data-icon="fact_check">fact_check</span>
             <span className="text-[10px]">Asistencia</span>
-        </a>
+        </Link>
         <a className="flex flex-col items-center text-slate-600" href="#">
             <span className="material-symbols-outlined" data-icon="mail">mail</span>
             <span className="text-[10px]">Mensajes</span>

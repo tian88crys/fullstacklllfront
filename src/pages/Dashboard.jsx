@@ -1,7 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { NotificationContext } from "../contexts/NotificationContext";
+import useNotificationObserver from "../hooks/useNotificationObserver";
 
 const Dashboard = () => {
+    // Suscripción al stream de eventos (simulado con userId = 1)
+    useNotificationObserver(1);
+    const { unreadCount, notifications, markAllAsRead } = useContext(NotificationContext);
+    const [showNotifications, setShowNotifications] = useState(false);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        navigate('/');
+    };
     return (
         <div className="bg-surface font-body text-on-surface antialiased">
             {/* SideNavBar Shell */}
@@ -45,9 +56,9 @@ const Dashboard = () => {
                             Mis Cursos
                         </span>
                     </Link>
-                    <a
+                    <Link
                         className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
-                        href="/asistencia.html"
+                        to="/asistencia"
                     >
                         <span className="material-symbols-outlined" data-icon="fact_check">
                             fact_check
@@ -55,10 +66,10 @@ const Dashboard = () => {
                         <span className="font-inter font-medium text-sm tracking-wide">
                             Asistencia
                         </span>
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                         className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
-                        href="/notas.html"
+                        to="/notas"
                     >
                         <span className="material-symbols-outlined" data-icon="grade">
                             grade
@@ -66,7 +77,7 @@ const Dashboard = () => {
                         <span className="font-inter font-medium text-sm tracking-wide">
                             Notas
                         </span>
-                    </a>
+                    </Link>
                     <a
                         className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
                         href="#"
@@ -146,16 +157,58 @@ const Dashboard = () => {
                             />
                         </div>
                         {/* Actions */}
-                        <div className="flex items-center gap-2">
-                            <button className="p-2 text-slate-600 hover:bg-slate-100 transition-colors rounded-full relative">
+                        <div className="flex items-center gap-2 relative">
+                            <button 
+                                onClick={() => {
+                                    setShowNotifications(!showNotifications);
+                                    if (unreadCount > 0) markAllAsRead();
+                                }}
+                                className="p-2 text-slate-600 hover:bg-slate-100 transition-colors rounded-full relative"
+                            >
                                 <span
                                     className="material-symbols-outlined"
                                     data-icon="notifications"
                                 >
                                     notifications
                                 </span>
-                                <span className="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full"></span>
+                                {unreadCount > 0 && (
+                                    <span className="absolute top-0 right-0 w-4 h-4 bg-secondary text-white text-[10px] font-bold flex items-center justify-center rounded-full">
+                                        {unreadCount > 9 ? '9+' : unreadCount}
+                                    </span>
+                                )}
                             </button>
+
+                            {/* Dropdown de Notificaciones */}
+                            {showNotifications && (
+                                <div className="absolute top-12 right-0 w-80 bg-white shadow-xl rounded-xl border border-outline-variant/20 z-50 overflow-hidden origin-top-right animate-in fade-in zoom-in duration-200">
+                                    <div className="p-4 bg-surface-container-lowest border-b border-outline-variant/10 flex justify-between items-center">
+                                        <h3 className="font-bold text-sm text-primary font-headline">Notificaciones</h3>
+                                    </div>
+                                    <div className="max-h-80 overflow-y-auto">
+                                        {notifications.length === 0 ? (
+                                            <div className="p-6 text-center text-sm text-on-surface-variant">
+                                                No hay notificaciones
+                                            </div>
+                                        ) : (
+                                            notifications.map((notif, idx) => (
+                                                <div key={idx} className="p-4 border-b border-outline-variant/5 hover:bg-surface-container-lowest transition-colors flex gap-3 items-start">
+                                                    <div className="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+                                                        <span className="material-symbols-outlined text-on-secondary-container text-sm">grade</span>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-medium text-primary leading-tight">{notif.message}</p>
+                                                        <span className="text-[10px] text-on-surface-variant mt-1 block font-medium">Reciente</span>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                    <div className="p-3 bg-surface-container-lowest border-t border-outline-variant/10 text-center">
+                                        <button className="text-xs font-bold text-secondary hover:text-primary transition-colors">Ver todas</button>
+                                    </div>
+                                </div>
+                            )}
+
                             <button className="p-2 text-slate-600 hover:bg-slate-100 transition-colors rounded-full">
                                 <span className="material-symbols-outlined" data-icon="settings">
                                     settings
@@ -173,8 +226,9 @@ const Dashboard = () => {
                                     Prof. Juan Pérez
                                 </span>
                                 <span
-                                    className="material-symbols-outlined text-slate-400"
+                                    className="material-symbols-outlined text-slate-400 hover:text-red-500 cursor-pointer transition-colors"
                                     data-icon="logout"
+                                    onClick={handleLogout}
                                 >
                                     logout
                                 </span>
@@ -399,7 +453,7 @@ const Dashboard = () => {
                                     Accesos Rápidos
                                 </h3>
                                 <div className="space-y-3">
-                                    <a href="/asistencia.html" className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
+                                    <Link to="/asistencia" className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
                                         <span
                                             className="material-symbols-outlined text-secondary group-hover:text-white"
                                             data-icon="how_to_reg"
@@ -407,8 +461,8 @@ const Dashboard = () => {
                                             how_to_reg
                                         </span>
                                         <span className="font-medium text-sm">Pasar Asistencia</span>
-                                    </a>
-                                    <a href="/notas.html" className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
+                                    </Link>
+                                    <Link to="/notas" className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
                                         <span
                                             className="material-symbols-outlined text-secondary group-hover:text-white"
                                             data-icon="upload_file"
@@ -416,7 +470,7 @@ const Dashboard = () => {
                                             upload_file
                                         </span>
                                         <span className="font-medium text-sm">Subir Nota</span>
-                                    </a>
+                                    </Link>
                                     <a href="#" className="w-full flex items-center gap-3 p-4 bg-surface-container-lowest rounded-xl hover:bg-primary hover:text-white transition-all group shadow-sm">
                                         <span
                                             className="material-symbols-outlined text-secondary group-hover:text-white"
@@ -492,18 +546,18 @@ const Dashboard = () => {
                     </span>
                     <span className="text-[10px]">Cursos</span>
                 </Link>
-                <a className="flex flex-col items-center text-slate-600" href="/asistencia.html">
+                <Link className="flex flex-col items-center text-slate-600" to="/asistencia">
                     <span className="material-symbols-outlined" data-icon="fact_check">
                         fact_check
                     </span>
                     <span className="text-[10px]">Asistencia</span>
-                </a>
-                <a className="flex flex-col items-center text-slate-600" href="/notas.html">
+                </Link>
+                <Link className="flex flex-col items-center text-slate-600" to="/notas">
                     <span className="material-symbols-outlined" data-icon="grade">
                         grade
                     </span>
                     <span className="text-[10px]">Notas</span>
-                </a>
+                </Link>
                 <a className="flex flex-col items-center text-slate-600" href="#">
                     <span className="material-symbols-outlined" data-icon="mail">
                         mail

@@ -1,30 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUsuario } from './Api/usuarioService.js';
+import axiosClient from '../api/axiosClient';
 import './Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
-    
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
+    const [identifier, setIdentifier] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError(null); 
+        setError('');
+        setIsLoading(true);
 
         try {
-            
-            const user = await loginUsuario(email, password);
-            
-            localStorage.setItem('usuarioNombre', user.nombreCompleto);
-            localStorage.setItem('usuarioRol', user.rol);
-            
+            // Usamos las variables que tu compañera configuró
+            const response = await axiosClient.post('/usuarios/login', {
+                correo: identifier,
+                contrasenaVal: password
+            });
+
+            // Guardamos en el localStorage lo que ella programó
+            if (response.data) {
+                localStorage.setItem('usuarioNombre', response.data.nombreCompleto || 'Usuario');
+                localStorage.setItem('usuarioRol', response.data.rol || 'DOCENTE');
+            }
+
+            console.log('Login exitoso:', response.data);
             navigate('/dashboard');
         } catch (err) {
-            setError("Correo o contraseña incorrectos. Intente nuevamente.");
-            console.error("Error en login:", err.message);
+            console.error('Error de login:', err);
+            setError('Credenciales inválidas o problema de conexión.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -43,7 +53,14 @@ const Login = () => {
                 <div className="w-full bg-surface-container-lowest rounded-xl p-10 shadow-ambient">
                     <div className="mb-8">
                         <h1 className="font-headline font-bold text-xl text-on-surface">Inicio de Sesión</h1>
-                        {error && <p className="text-red-600 text-sm mt-2 font-bold">{error}</p>}
+                        <p className="text-on-surface-variant text-sm mt-2 mb-4">
+                            Bienvenido al Portal de Educación. Por favor, ingrese sus credenciales para continuar.
+                        </p>
+                        {error && (
+                            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md text-sm font-semibold">
+                                {error}
+                            </div>
+                        )}
                     </div>
 
                     <form className="space-y-6" onSubmit={handleLogin}>
@@ -58,10 +75,11 @@ const Login = () => {
                                 <input
                                     className="w-full pl-11 pr-4 py-3.5 bg-surface-container-highest border-none rounded-lg focus:ring-0 text-on-surface transition-all border-b-2 border-transparent focus:border-primary"
                                     id="identifier"
+                                    name="identifier"
                                     placeholder="mail@ejemplo.cl"
                                     type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={identifier}
+                                    onChange={(e) => setIdentifier(e.target.value)}
                                     required
                                 />
                             </div>
@@ -87,9 +105,14 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <button className="w-full btn-gradient text-on-primary font-headline font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform active:scale-[0.98] mt-4 flex items-center justify-center gap-2" type="submit">
-                            <span>Iniciar Sesión</span>
-                            <span className="material-symbols-outlined text-[20px]" data-icon="login">login</span>
+                        {/* Action Button */}
+                        <button
+                            className="w-full btn-gradient text-on-primary font-headline font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform active:scale-[0.98] mt-4 flex items-center justify-center gap-2 disabled:opacity-70 disabled:scale-100"
+                            type="submit"
+                            disabled={isLoading}
+                        >
+                            <span>{isLoading ? 'Iniciando...' : 'Iniciar Sesión'}</span>
+                            {!isLoading && <span className="material-symbols-outlined text-[20px]" data-icon="login">login</span>}
                         </button>
                     </form>
                 </div>
@@ -99,4 +122,3 @@ const Login = () => {
 };
 
 export default Login;
-
