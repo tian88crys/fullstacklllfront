@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axiosClient from '../api/axiosClient';
 import './Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
+    const [identifier, setIdentifier] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        navigate('/dashboard');
+        setError('');
+        setIsLoading(true);
+
+        try {
+            // Usamos las variables que tu compañera configuró en usuarioService.js
+            const response = await axiosClient.post('/usuarios/login', {
+                correo: identifier,
+                contrasenaVal: password
+            });
+
+            // Si es exitoso, avanzamos
+            console.log('Login exitoso:', response.data);
+            navigate('/dashboard');
+        } catch (err) {
+            console.error('Error de login:', err);
+            setError('Credenciales inválidas o problema de conexión.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -28,9 +51,14 @@ const Login = () => {
                 <div className="w-full bg-surface-container-lowest rounded-xl p-10 shadow-ambient">
                     <div className="mb-8">
                         <h1 className="font-headline font-bold text-xl text-on-surface">Inicio de Sesión</h1>
-                        <p className="text-on-surface-variant text-sm mt-2">
+                        <p className="text-on-surface-variant text-sm mt-2 mb-4">
                             Bienvenido al Portal de Educación. Por favor, ingrese sus credenciales para continuar.
                         </p>
+                        {error && (
+                            <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md text-sm font-semibold">
+                                {error}
+                            </div>
+                        )}
                     </div>
 
                     <form className="space-y-6" onSubmit={handleLogin}>
@@ -52,6 +80,9 @@ const Login = () => {
                                     name="identifier"
                                     placeholder="12.345.678-9 o mail@ejemplo.cl"
                                     type="text"
+                                    value={identifier}
+                                    onChange={(e) => setIdentifier(e.target.value)}
+                                    required
                                 />
                             </div>
                         </div>
@@ -76,17 +107,21 @@ const Login = () => {
                                     name="password"
                                     placeholder="••••••••"
                                     type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
                                 />
                             </div>
                         </div>
 
                         {/* Action Button */}
                         <button
-                            className="w-full btn-gradient text-on-primary font-headline font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform active:scale-[0.98] mt-4 flex items-center justify-center gap-2"
+                            className="w-full btn-gradient text-on-primary font-headline font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all transform active:scale-[0.98] mt-4 flex items-center justify-center gap-2 disabled:opacity-70 disabled:scale-100"
                             type="submit"
+                            disabled={isLoading}
                         >
-                            <span>Iniciar Sesión</span>
-                            <span className="material-symbols-outlined text-[20px]" data-icon="login">login</span>
+                            <span>{isLoading ? 'Iniciando...' : 'Iniciar Sesión'}</span>
+                            {!isLoading && <span className="material-symbols-outlined text-[20px]" data-icon="login">login</span>}
                         </button>
                     </form>
 
