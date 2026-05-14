@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard.jsx'
 import Cursos from './pages/Cursos.jsx'
 import Notas from './pages/Notas.jsx'
 import Asistencia from './pages/Asistencia.jsx'
+import Mensajes from './pages/Mensajes.jsx'
 import { NotificationProvider } from './contexts/NotificationContext.jsx'
 
 createRoot(document.getElementById('root')).render(
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/cursos" element={<Cursos />} />
           <Route path="/notas" element={<Notas />} />
           <Route path="/asistencia" element={<Asistencia />} />
+          <Route path="/mensajes" element={<Mensajes />} />
         </Routes>
       </BrowserRouter>
     </NotificationProvider>

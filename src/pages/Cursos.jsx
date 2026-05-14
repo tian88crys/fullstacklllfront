@@ -46,11 +46,11 @@ const Cursos = () => {
                 <span className="material-symbols-outlined" data-icon="grade">grade</span>
                 <span className="font-inter font-medium text-sm tracking-wide">Notas</span>
             </Link>
-            <a className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
-                href="#">
+            <Link className="flex items-center gap-3 text-slate-300 px-6 py-4 opacity-80 hover:bg-white/5 hover:opacity-100 transition-all"
+                to="/mensajes">
                 <span className="material-symbols-outlined" data-icon="mail">mail</span>
                 <span className="font-inter font-medium text-sm tracking-wide">Mensajes</span>
-            </a>
+            </Link>
         </nav>
         {/*  CTA  */}
         <div className="px-6 py-6">
@@ -441,10 +441,10 @@ const Cursos = () => {
             <span className="material-symbols-outlined" data-icon="fact_check">fact_check</span>
             <span className="text-[10px]">Asistencia</span>
         </Link>
-        <a className="flex flex-col items-center text-slate-600" href="#">
+        <Link className="flex flex-col items-center text-slate-600" to="/mensajes">
             <span className="material-symbols-outlined" data-icon="mail">mail</span>
             <span className="text-[10px]">Mensajes</span>
-        </a>
+        </Link>
     </nav>
 
         </div>
