@@ -233,8 +233,9 @@ const Notas = () => {
                 <main className="p-8 space-y-8 max-w-7xl mx-auto">
                     <div className="flex justify-between items-end">
                         <div>
-                            <nav className="flex text-xs font-medium text-on-surface-variant mb-2 gap-2">
-                                <span>Dashboard</span><span>/</span><span>Mis Cursos</span><span>/</span>
+                            <nav className="flex items-center text-xs font-medium text-on-surface-variant mb-2 gap-2">
+                                <Link to="/dashboard" className="hover:text-primary transition-colors">Dashboard</Link><span>/</span>
+                                <Link to="/cursos" className="hover:text-primary transition-colors hover:underline">Mis Cursos</Link><span>/</span>
                                 <span className="text-primary font-bold">2º Medio A</span>
                             </nav>
                             <h2 className="text-4xl font-headline font-extrabold text-primary tracking-tight">Matemáticas <span className="text-secondary font-medium">·</span> 2º Medio A</h2>
@@ -249,6 +250,46 @@ const Notas = () => {
                             </button>
                         </div>
                     </div>
+
+                    {/* Selectors / Filtering */}
+                    <section className="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant/10 flex flex-col md:flex-row items-center gap-4">
+                        {/* Search Bar */}
+                        <div className="relative flex-grow">
+                            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+                            <input className="w-full bg-surface-container-low border-0 rounded-full pl-11 pr-4 py-3 text-sm font-medium focus:ring-2 focus:ring-primary shadow-sm" placeholder="Buscar estudiante..." type="text" />
+                        </div>
+                        {/* Filters Group */}
+                        <div className="flex items-center gap-3 w-full md:w-auto">
+                            {/* Subject Filter */}
+                            <div className="relative min-w-[160px]">
+                                <label className="absolute -top-2 left-3 bg-surface-container-lowest px-1 text-[10px] font-bold text-primary uppercase tracking-widest z-10">Asignatura</label>
+                                <select className="w-full appearance-none bg-surface-container-low border border-outline-variant/20 rounded-lg px-4 py-2.5 text-sm font-medium focus:ring-2 focus:ring-primary text-on-surface">
+                                    <option>Matemáticas</option>
+                                    <option>Lenguaje</option>
+                                    <option>Física</option>
+                                    <option>Geometría</option>
+                                </select>
+                                <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" data-icon="expand_more">expand_more</span>
+                            </div>
+                            {/* Course Filter */}
+                            <div className="relative min-w-[140px]">
+                                <label className="absolute -top-2 left-3 bg-surface-container-lowest px-1 text-[10px] font-bold text-primary uppercase tracking-widest z-10">Curso</label>
+                                <select className="w-full appearance-none bg-surface-container-low border border-outline-variant/20 rounded-lg px-4 py-2.5 text-sm font-medium focus:ring-2 focus:ring-primary text-on-surface">
+                                    <option>2º Medio A</option>
+                                    <option>1º Medio B</option>
+                                    <option>3º Medio C</option>
+                                </select>
+                                <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" data-icon="expand_more">expand_more</span>
+                            </div>
+                            {/* Quick Info Tooltip-like icon */}
+                            <div className="p-2 rounded-full bg-secondary-container/20 text-secondary group relative cursor-help">
+                                <span className="material-symbols-outlined" data-icon="info">info</span>
+                                <div className="absolute bottom-full right-0 mb-2 w-48 p-2 bg-inverse-surface text-inverse-on-surface text-[10px] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl">
+                                    Recuerde que el cierre de actas es el 15 de Junio.
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
                     <section className="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/10">
                         <div className="overflow-x-auto">
@@ -303,7 +344,65 @@ const Notas = () => {
                                 </tbody>
                             </table>
                         </div>
+                        {/* Pagination & Table Info */}
+                        <div className="p-6 bg-surface-container-lowest border-t border-slate-50 flex items-center justify-between">
+                            <p className="text-sm text-on-surface-variant">Mostrando <span className="font-bold text-primary">{students.length}</span> de 32 estudiantes</p>
+                            <div className="flex gap-2">
+                                <button className="p-2 rounded hover:bg-slate-100 transition-colors disabled:opacity-30" disabled>
+                                    <span className="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+                                </button>
+                                <button className="w-8 h-8 rounded bg-primary text-white text-sm font-bold">1</button>
+                                <button className="w-8 h-8 rounded hover:bg-slate-100 text-sm font-bold transition-colors">2</button>
+                                <button className="w-8 h-8 rounded hover:bg-slate-100 text-sm font-bold transition-colors">3</button>
+                                <button className="p-2 rounded hover:bg-slate-100 transition-colors">
+                                    <span className="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
                     </section>
+                    {/* Stats/Insights Cards */}
+                    <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-primary text-white p-6 rounded-xl shadow-sm flex flex-col justify-between h-40 group hover:shadow-md transition-shadow">
+                            <div className="flex justify-between items-start">
+                                <span className="text-xs font-bold uppercase tracking-widest text-primary-fixed">Promedio de Curso</span>
+                                <span className="material-symbols-outlined text-secondary" data-icon="trending_up">trending_up</span>
+                            </div>
+                            <div>
+                                <span className="text-5xl font-headline font-extrabold">5.8</span>
+                                <p className="text-xs mt-1 text-primary-fixed">+0.2 respecto al mes pasado</p>
+                            </div>
+                        </div>
+                        <div className="bg-surface-container-lowest border border-outline-variant/10 p-6 rounded-xl shadow-sm flex flex-col justify-between h-40 group hover:shadow-md transition-shadow">
+                            <div className="flex justify-between items-start">
+                                <span className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Alumnos en Riesgo</span>
+                                <span className="material-symbols-outlined text-error" data-icon="warning">warning</span>
+                            </div>
+                            <div>
+                                <span className="text-5xl font-headline font-extrabold text-primary">03</span>
+                                <p className="text-xs mt-1 text-on-surface-variant">Requieren reforzamiento urgente</p>
+                            </div>
+                        </div>
+                        <div className="bg-surface-container-lowest border border-outline-variant/10 p-6 rounded-xl shadow-sm flex flex-col justify-between h-40 group hover:shadow-md transition-shadow">
+                            <div className="flex justify-between items-start">
+                                <span className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Ingreso de Notas</span>
+                                <span className="material-symbols-outlined text-secondary" data-icon="pending_actions">pending_actions</span>
+                            </div>
+                            <div className="w-full">
+                                <div className="flex justify-between mb-1">
+                                    <span className="text-xs font-bold text-primary">82% Completado</span>
+                                </div>
+                                <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                    <div className="bg-secondary h-full rounded-full" style={{ width: '82%' }}></div>
+                                </div>
+                                <p className="text-[10px] mt-2 text-on-surface-variant italic">Quedan 3 días para el cierre</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer Info */}
+                    <footer className="mt-auto py-10 text-center border-t border-slate-100">
+                        <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest">Colegio Bernardo O’Higgins © 2024 · Sistema de Gestión Académica</p>
+                    </footer>
                 </main>
             </div>
             

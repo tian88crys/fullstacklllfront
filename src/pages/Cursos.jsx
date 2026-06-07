@@ -191,12 +191,12 @@ const Cursos = () => {
                                     className="material-symbols-outlined text-xl mb-1 group-hover/btn:text-white">how_to_reg</span>
                                 <span className="text-[9px] font-bold uppercase">Asistencia</span>
                             </button>
-                            <button
+                            <Link to="/notas"
                                 className="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/20 hover:bg-primary hover:text-white transition-all group/btn">
                                 <span
                                     className="material-symbols-outlined text-xl mb-1 group-hover/btn:text-white">grading</span>
                                 <span className="text-[9px] font-bold uppercase">Notas</span>
-                            </button>
+                            </Link>
                             <button
                                 className="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/20 hover:bg-primary hover:text-white transition-all group/btn">
                                 <span
@@ -251,12 +251,12 @@ const Cursos = () => {
                                     className="material-symbols-outlined text-xl mb-1 group-hover/btn:text-white">how_to_reg</span>
                                 <span className="text-[9px] font-bold uppercase">Asistencia</span>
                             </button>
-                            <button
+                            <Link to="/notas"
                                 className="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/20 hover:bg-primary hover:text-white transition-all group/btn">
                                 <span
                                     className="material-symbols-outlined text-xl mb-1 group-hover/btn:text-white">grading</span>
                                 <span className="text-[9px] font-bold uppercase">Notas</span>
-                            </button>
+                            </Link>
                             <button
                                 className="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/20 hover:bg-primary hover:text-white transition-all group/btn">
                                 <span
@@ -310,12 +310,12 @@ const Cursos = () => {
                                     className="material-symbols-outlined text-xl mb-1 group-hover/btn:text-white">how_to_reg</span>
                                 <span className="text-[9px] font-bold uppercase">Asistencia</span>
                             </button>
-                            <button
+                            <Link to="/notas"
                                 className="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/20 hover:bg-primary hover:text-white transition-all group/btn">
                                 <span
                                     className="material-symbols-outlined text-xl mb-1 group-hover/btn:text-white">grading</span>
                                 <span className="text-[9px] font-bold uppercase">Notas</span>
-                            </button>
+                            </Link>
                             <button
                                 className="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/20 hover:bg-primary hover:text-white transition-all group/btn">
                                 <span
@@ -369,12 +369,12 @@ const Cursos = () => {
                                     className="material-symbols-outlined text-xl mb-1 group-hover/btn:text-white">how_to_reg</span>
                                 <span className="text-[9px] font-bold uppercase">Asistencia</span>
                             </button>
-                            <button
+                            <Link to="/notas"
                                 className="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/20 hover:bg-primary hover:text-white transition-all group/btn">
                                 <span
                                     className="material-symbols-outlined text-xl mb-1 group-hover/btn:text-white">grading</span>
                                 <span className="text-[9px] font-bold uppercase">Notas</span>
-                            </button>
+                            </Link>
                             <button
                                 className="flex flex-col items-center justify-center p-3 rounded-lg border border-outline-variant/20 hover:bg-primary hover:text-white transition-all group/btn">
                                 <span
